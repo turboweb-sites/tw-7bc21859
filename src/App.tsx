@@ -20,10 +20,10 @@ function HomePage() {
       <Hero />
       <Services />
       <About />
+      <WhyUs />
       <Gallery />
       <Pricing />
       <ServiceArea />
-      <WhyUs />
       <Testimonials />
       <BookingCTA />
       <Contact />
@@ -60,23 +60,25 @@ function ServicePage({ title, subtitle, description, image, features, pricing }:
             {subtitle}
           </span>
           <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
-            {title.split(' ')[0]} <span className="text-gradient">{title.split(' ').slice(1).join(' ')}</span>
+            {title}
           </h1>
-          <p className="text-dark-300 text-lg max-w-2xl leading-relaxed">{description}</p>
+          <p className="text-dark-300 text-lg max-w-2xl leading-relaxed">
+            {description}
+          </p>
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-20 bg-dark-900">
+      <section className="py-20 bg-dark-950">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mb-12 text-center">
             WHAT'S <span className="text-gradient">INCLUDED</span>
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <div key={index} className="p-6 rounded-2xl glass hover:bg-white/5 transition-all">
-                <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center mb-4 border border-amber-500/30">
-                  <span className="text-amber-400 font-bold">{index + 1}</span>
+              <div key={index} className="glass rounded-2xl p-6 hover:border-amber-500/30 transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center mb-4">
+                  <div className="w-2 h-2 rounded-full bg-amber-400" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-white mb-2">{feature.title}</h3>
                 <p className="text-dark-400 text-sm leading-relaxed">{feature.desc}</p>
@@ -87,213 +89,174 @@ function ServicePage({ title, subtitle, description, image, features, pricing }:
       </section>
 
       {/* Pricing */}
-      <section className="py-20 bg-dark-950">
+      <section className="py-20 bg-dark-900/50">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mb-8">
-            SERVICE <span className="text-gradient">PRICING</span>
+            PRICING
           </h2>
-          <div className="space-y-4 mb-10">
-            {pricing.map((item, index) => (
-              <div key={index} className="flex items-center justify-between p-4 rounded-xl glass">
-                <span className="text-dark-300">{item.split('–')[0]}</span>
-                <span className="text-amber-400 font-bold">{item.split('–')[1] || ''}</span>
-              </div>
+          <div className="glass rounded-2xl p-8">
+            {pricing.map((line, index) => (
+              <p key={index} className="text-dark-300 text-lg mb-2">{line}</p>
             ))}
+            <a
+              href="tel:+13475551234"
+              className="inline-flex items-center gap-2 mt-6 px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-dark-950 font-bold rounded-full hover:from-amber-400 hover:to-amber-500 transition-all"
+            >
+              Call for a Quote
+            </a>
           </div>
-          <a
-            href="tel:7252663030"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-dark-950 font-bold text-lg rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all shadow-2xl shadow-amber-500/30"
-          >
-            Book Now — (725) 266-3030
-          </a>
         </div>
       </section>
+
+      <BookingCTA />
+      <Contact />
     </div>
   );
 }
 
-function InteriorDetailingPage() {
-  return (
-    <ServicePage
-      title="Interior Detailing"
-      subtitle="DEEP CLEAN YOUR CABIN"
-      description="Our interior detailing service restores every surface inside your vehicle to like-new condition. From deep vacuuming and steam cleaning to leather conditioning and odor elimination — we leave no spot untouched."
-      image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDrDFDDRxB9ji5662spX5RZy8_aBS8rbW2Q&s"
-      features={[
-        { title: 'Deep Vacuum & Steam Clean', desc: 'Every carpet fiber, seat crevice, and floor mat gets thorough attention with professional-grade steam equipment.' },
-        { title: 'Leather & Upholstery Care', desc: 'Conditioning and protection for leather seats, or deep fabric cleaning for cloth interiors.' },
-        { title: 'Dashboard & Console Detail', desc: 'All plastic, vinyl, and trim pieces cleaned, dressed, and protected with UV-resistant products.' },
-        { title: 'Odor Elimination', desc: 'Professional ozone treatment and deodorizing to remove smoke, pet, and food odors permanently.' },
-      ]}
-      pricing={[
-        'Sedan / Coupe – from $99',
-        'SUV / Crossover – from $129',
-        'Truck / Van – from $149',
-        'Add Ozone Treatment – +$40',
-      ]}
-    />
-  );
-}
+const servicePages = [
+  {
+    path: '/services/interior-detailing',
+    title: 'INTERIOR DETAILING',
+    subtitle: 'PREMIUM SERVICE',
+    description: 'Complete deep cleaning of every interior surface. We use professional-grade steam cleaners, UV sanitizers, and premium leather conditioners to restore your cabin to like-new condition.',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTDrDFDDRxB9ji5662spX5RZy8_aBS8rbW2Q&s',
+    features: [
+      { title: 'Deep Vacuum & Steam', desc: 'Professional extraction of dirt, debris, and allergens from every surface including seats, carpets, and floor mats.' },
+      { title: 'Leather Care', desc: 'Cleaning, conditioning, and UV protection for all leather surfaces to prevent cracking and fading.' },
+      { title: 'Dashboard & Console', desc: 'Detailed cleaning and dressing of all plastic, vinyl, and trim surfaces with UV protection.' },
+      { title: 'Glass Cleaning', desc: 'Streak-free interior glass cleaning for crystal clear visibility.' },
+      { title: 'Odor Elimination', desc: 'Professional ozone treatment and enzyme-based odor removal for a fresh, clean cabin.' },
+      { title: 'Trunk Detailing', desc: 'Complete trunk cleaning including carpet extraction, panel cleaning, and organization.' },
+    ],
+    pricing: ['Sedan / Coupe — from $149', 'SUV / Crossover — from $179', 'Truck / Van — from $199', 'Add pet hair removal — $50'],
+  },
+  {
+    path: '/services/exterior-detailing',
+    title: 'EXTERIOR DETAILING',
+    subtitle: 'SHOWROOM FINISH',
+    description: 'A meticulous hand wash and detail that brings your vehicle\'s exterior back to showroom condition. Clay bar, polish, and premium wax for lasting protection.',
+    image: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=800&h=600&fit=crop',
+    features: [
+      { title: 'Hand Wash & Dry', desc: 'Two-bucket method hand wash with pH-neutral shampoo and microfiber drying for a swirl-free finish.' },
+      { title: 'Clay Bar Treatment', desc: 'Remove embedded contaminants from paint for a glass-smooth surface.' },
+      { title: 'Wheel & Tire Detail', desc: 'Deep clean of wheels, calipers, and wheel wells. Tire dressing for a rich black finish.' },
+      { title: 'Trim Restoration', desc: 'Restore faded plastic and rubber trim to like-new dark appearance.' },
+      { title: 'Wax & Sealant', desc: 'Premium carnauba wax or synthetic sealant for up to 3 months of protection and shine.' },
+      { title: 'Glass Treatment', desc: 'Water-repellent coating on all exterior glass for improved visibility in rain.' },
+    ],
+    pricing: ['Sedan / Coupe — from $129', 'SUV / Crossover — from $159', 'Truck / Van — from $179', 'Add clay bar treatment — $40'],
+  },
+  {
+    path: '/services/ceramic-coating',
+    title: 'CERAMIC COATING',
+    subtitle: 'ULTIMATE PROTECTION',
+    description: 'Professional-grade 9H ceramic coating that provides years of protection. Hydrophobic, UV-resistant, and incredibly glossy — the ultimate paint protection.',
+    image: 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&h=600&fit=crop',
+    features: [
+      { title: '9H Hardness', desc: 'Industry-leading 9H rated ceramic coating for maximum scratch resistance and durability.' },
+      { title: 'Hydrophobic Finish', desc: 'Water beads and rolls off effortlessly, keeping your car cleaner for longer.' },
+      { title: 'UV Protection', desc: 'Blocks harmful UV rays to prevent paint oxidation, fading, and chalking.' },
+      { title: 'Chemical Resistance', desc: 'Protects against bird droppings, tree sap, acid rain, and road salt damage.' },
+      { title: 'Paint Correction First', desc: 'Full multi-stage paint correction included before coating for a flawless base.' },
+      { title: '2-5 Year Warranty', desc: 'Professional application with warranty coverage for long-term peace of mind.' },
+    ],
+    pricing: ['1-Year Coating — from $499', '3-Year Coating — from $799', '5-Year Coating — from $1,199', 'Full vehicle PPF + Ceramic — Custom quote'],
+  },
+  {
+    path: '/services/paint-correction',
+    title: 'PAINT CORRECTION',
+    subtitle: 'MIRROR FINISH',
+    description: 'Multi-stage machine polishing to eliminate swirl marks, scratches, water spots, and oxidation. We restore your paint to a deep, mirror-like finish.',
+    image: 'https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&h=600&fit=crop',
+    features: [
+      { title: 'Paint Assessment', desc: 'Detailed inspection under LED lighting to map out all paint defects and create a correction plan.' },
+      { title: 'Single-Stage Polish', desc: 'Remove light swirl marks and minor scratches with a one-step polish for 70%+ defect removal.' },
+      { title: 'Multi-Stage Correction', desc: 'Two or three-stage compounding and polishing for 90-95%+ defect removal.' },
+      { title: 'Wet Sanding', desc: 'For deep scratches and severe orange peel — wet sanding followed by multi-stage polish.' },
+      { title: 'IPA Wipedown', desc: 'Isopropyl alcohol wipe to reveal the true corrected finish without filler residue.' },
+      { title: 'Final Protection', desc: 'Sealant or ceramic coating application to lock in the corrected finish.' },
+    ],
+    pricing: ['Single-Stage — from $299', 'Two-Stage Correction — from $499', 'Three-Stage Correction — from $699', 'Wet sand + correction — from $899'],
+  },
+  {
+    path: '/services/full-detail',
+    title: 'FULL DETAIL PACKAGE',
+    subtitle: 'COMPLETE TRANSFORMATION',
+    description: 'Our most popular service — a comprehensive interior and exterior detail that covers every inch of your vehicle. The ultimate refresh.',
+    image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&h=600&fit=crop',
+    features: [
+      { title: 'Full Interior Detail', desc: 'Complete deep cleaning of all interior surfaces including steam, extraction, and conditioning.' },
+      { title: 'Full Exterior Detail', desc: 'Hand wash, clay bar, polish, and wax for a complete exterior transformation.' },
+      { title: 'Engine Bay Cleaning', desc: 'Safe degreasing and detailing of the engine bay for a clean and impressive look.' },
+      { title: 'Wheel & Tire Package', desc: 'Deep cleaning, decontamination, and protection for wheels, tires, and wheel wells.' },
+      { title: 'Glass Treatment', desc: 'Interior and exterior glass cleaning with hydrophobic coating application.' },
+      { title: 'Final Inspection', desc: 'Walk-around inspection under LED lighting to ensure every detail meets our standards.' },
+    ],
+    pricing: ['Sedan / Coupe — from $249', 'SUV / Crossover — from $299', 'Truck / Van — from $349', 'Add ceramic spray sealant — $79'],
+  },
+  {
+    path: '/services/premium-protection',
+    title: 'PREMIUM PROTECTION',
+    subtitle: 'ULTIMATE DEFENSE',
+    description: 'The highest level of vehicle protection combining paint protection film, ceramic coating, and premium sealants for total peace of mind.',
+    image: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=800&h=600&fit=crop',
+    features: [
+      { title: 'Paint Protection Film', desc: 'Self-healing TPU film that protects against rock chips, scratches, and road debris.' },
+      { title: 'Ceramic Coating', desc: '9H professional ceramic coating over PPF or paint for hydrophobic, glossy protection.' },
+      { title: 'Glass Coating', desc: 'Ceramic glass treatment for extreme water repellency and improved night visibility.' },
+      { title: 'Wheel Coating', desc: 'Ceramic coating for wheels to prevent brake dust bonding and make cleaning effortless.' },
+      { title: 'Trim & Plastic Coating', desc: 'Long-lasting coating on all exterior trim to prevent fading and yellowing.' },
+      { title: 'Maintenance Kit', desc: 'Premium maintenance kit included with pH-neutral wash, detail spray, and microfiber towels.' },
+    ],
+    pricing: ['Partial Front PPF — from $799', 'Full Front PPF — from $1,499', 'Full Body PPF — from $4,999', 'PPF + Ceramic Combo — Custom quote'],
+  },
+];
 
-function ExteriorDetailingPage() {
-  return (
-    <ServicePage
-      title="Exterior Detailing"
-      subtitle="SHOWROOM SHINE"
-      description="A meticulous hand wash, clay bar treatment, and protective sealant application that leaves your paint gleaming and protected."
-      image="https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=1200&h=600&fit=crop"
-      features={[
-        { title: 'Hand Wash & Dry', desc: 'Two-bucket method hand wash with pH-neutral shampoo for a swirl-free finish.' },
-        { title: 'Clay Bar Treatment', desc: 'Removes embedded contaminants from the paint surface for a glass-smooth feel.' },
-        { title: 'Wheel & Tire Detail', desc: 'Wheels degreased and cleaned, tires dressed with UV-protective coating.' },
-        { title: 'Sealant & Trim Restoration', desc: 'Paint sealant for long-lasting protection. Faded trim pieces restored to deep black.' },
-      ]}
-      pricing={[
-        'Sedan / Coupe – from $79',
-        'SUV / Crossover – from $99',
-        'Truck / Van – from $119',
-        'Add Clay Bar – +$30',
-      ]}
-    />
-  );
-}
-
-function CeramicCoatingPage() {
-  return (
-    <ServicePage
-      title="Ceramic Coating"
-      subtitle="ULTIMATE PROTECTION"
-      description="Professional-grade 9H ceramic coating that provides years of protection against UV rays, chemical etching, and water spots."
-      image="https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=1200&h=600&fit=crop"
-      features={[
-        { title: '9H Hardness Coating', desc: 'Industrial-grade ceramic coating that bonds to the clear coat for maximum scratch resistance.' },
-        { title: 'Hydrophobic Finish', desc: 'Water beads and sheets off the surface, making washing easier and keeping your car cleaner longer.' },
-        { title: 'UV & Chemical Protection', desc: 'Blocks harmful UV rays and resists damage from bird droppings, tree sap, and road chemicals.' },
-        { title: '2–5 Year Durability', desc: 'Depending on the package, enjoy years of low-maintenance protection and showroom shine.' },
-      ]}
-      pricing={[
-        '1-Year Ceramic Coating – from $299',
-        '3-Year Ceramic Coating – from $599',
-        '5-Year Ceramic Coating – from $899',
-        'Paint Correction included with 3yr & 5yr packages',
-      ]}
-    />
-  );
-}
-
-function PaintCorrectionPage() {
-  return (
-    <ServicePage
-      title="Paint Correction"
-      subtitle="RESTORE YOUR FINISH"
-      description="Multi-stage paint correction to remove swirl marks, scratches, oxidation, and imperfections — revealing a mirror-like finish."
-      image="https://images.unsplash.com/photo-1542362567-b07e54358753?w=1200&h=600&fit=crop"
-      features={[
-        { title: 'Swirl Mark Removal', desc: 'Machine polishing to eliminate spider-web swirl marks left by improper washing techniques.' },
-        { title: 'Scratch Removal', desc: 'Light to moderate scratches buffed out using multi-stage compounding and polishing.' },
-        { title: 'Oxidation Restoration', desc: 'Faded, chalky paint restored to its original color depth and clarity.' },
-        { title: 'Mirror Finish', desc: 'Final stage polish brings out incredible gloss and reflection in the clear coat.' },
-      ]}
-      pricing={[
-        'Single-Stage Correction – from $199',
-        'Two-Stage Correction – from $349',
-        'Multi-Stage Correction – from $499',
-        'Best paired with Ceramic Coating',
-      ]}
-    />
-  );
-}
-
-function FullDetailPage() {
-  return (
-    <ServicePage
-      title="Full Detail"
-      subtitle="COMPLETE PACKAGE"
-      description="Our most popular service — a comprehensive interior and exterior detail that transforms your vehicle from top to bottom."
-      image="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=1200&h=600&fit=crop"
-      features={[
-        { title: 'Complete Interior Clean', desc: 'Full vacuum, steam clean, leather conditioning, dashboard detail, and window cleaning.' },
-        { title: 'Full Exterior Detail', desc: 'Hand wash, clay bar, sealant application, wheel detail, and tire dressing.' },
-        { title: 'Engine Bay Cleaning', desc: 'Degreased, cleaned, and dressed for a factory-fresh look under the hood.' },
-        { title: 'Final Inspection', desc: 'Quality check on every surface to ensure nothing is missed. Air freshener included.' },
-      ]}
-      pricing={[
-        'Sedan / Coupe – from $199',
-        'SUV / Crossover – from $249',
-        'Truck / Van – from $279',
-        'Add Ceramic Spray Sealant – +$50',
-      ]}
-    />
-  );
-}
-
-function PremiumProtectionPage() {
-  return (
-    <ServicePage
-      title="Premium Protection"
-      subtitle="MAXIMUM DEFENSE"
-      description="The ultimate protection package combining paint protection film, ceramic coating, and premium sealants for unmatched durability."
-      image="https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=1200&h=600&fit=crop"
-      features={[
-        { title: 'Paint Protection Film', desc: 'Self-healing PPF applied to high-impact areas — bumper, hood, fenders, and mirrors.' },
-        { title: 'Premium Paint Sealant', desc: 'Professional-grade sealant that bonds to clear coat for months of protection and shine.' },
-        { title: 'Glass Treatment', desc: 'Hydrophobic coating on all glass surfaces for improved visibility in rain.' },
-        { title: 'Trim & Wheel Coating', desc: 'Ceramic-infused coating applied to trim pieces and wheels for long-lasting protection.' },
-      ]}
-      pricing={[
-        'Glass Treatment Only – from $79',
-        'Trim & Wheel Coating – from $149',
-        'PPF Front-End Package – from $799',
-        'Full Premium Protection – from $1,299',
-      ]}
-    />
-  );
-}
-
-export default function App() {
-  const [loading, setLoading] = useState(true);
+function App() {
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
-    return () => clearTimeout(timer);
+    setIsLoaded(true);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-dark-950 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-amber-500/30 border-t-amber-500 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-dark-400 font-heading tracking-wider">SCRATCHPRO DETAILING</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-dark-950">
+    <div className={`min-h-screen bg-dark-950 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <Header />
-      <Switch>
-        <Route path="/" component={HomePage} />
-        <Route path="/services/interior-detailing" component={InteriorDetailingPage} />
-        <Route path="/services/exterior-detailing" component={ExteriorDetailingPage} />
-        <Route path="/services/ceramic-coating" component={CeramicCoatingPage} />
-        <Route path="/services/paint-correction" component={PaintCorrectionPage} />
-        <Route path="/services/full-detail" component={FullDetailPage} />
-        <Route path="/services/premium-protection" component={PremiumProtectionPage} />
-        <Route>
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="text-center">
-              <h1 className="font-heading text-6xl font-bold text-white mb-4">404</h1>
-              <p className="text-dark-400 mb-8">Page not found</p>
-              <a href="/" className="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-dark-950 font-bold rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all">
-                Go Home
-              </a>
+      <main>
+        <Switch>
+          <Route path="/">
+            <HomePage />
+          </Route>
+          {servicePages.map((service) => (
+            <Route key={service.path} path={service.path}>
+              <ServicePage
+                title={service.title}
+                subtitle={service.subtitle}
+                description={service.description}
+                image={service.image}
+                features={service.features}
+                pricing={service.pricing}
+              />
+            </Route>
+          ))}
+          <Route>
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="text-center">
+                <h1 className="font-heading text-6xl font-bold text-white mb-4">404</h1>
+                <p className="text-dark-400 text-lg mb-8">Page not found</p>
+                <a href="/" className="px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-dark-950 font-bold rounded-full hover:from-amber-400 hover:to-amber-500 transition-all">
+                  Go Home
+                </a>
+              </div>
             </div>
-          </div>
-        </Route>
-      </Switch>
+          </Route>
+        </Switch>
+      </main>
       <Footer />
       <ScrollToTop />
     </div>
   );
 }
+
+export default App;
