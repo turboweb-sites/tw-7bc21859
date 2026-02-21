@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Quote, ArrowRight } from 'lucide-react';
+import { useLocation } from 'wouter';
 
 const reviews = [
   {
@@ -41,6 +42,7 @@ const reviews = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [, setLocation] = useLocation();
 
   const handlePrev = () => {
     setCurrentIndex(currentIndex === 0 ? reviews.length - 1 : currentIndex - 1);
@@ -55,7 +57,6 @@ export default function Testimonials() {
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[200px]" />
 
       <div className="max-w-7xl mx-auto px-4 relative">
-        {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-sm font-medium mb-4 border border-amber-500/20">
             TESTIMONIALS
@@ -68,7 +69,6 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* Featured Review */}
         <div className="max-w-4xl mx-auto mb-12">
           <div className="glass rounded-2xl p-8 md:p-12 relative">
             <Quote size={48} className="text-amber-500/20 absolute top-6 left-6" />
@@ -109,7 +109,6 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Dots */}
           <div className="flex justify-center gap-2 mt-6">
             {reviews.map((_, index) => (
               <button
@@ -123,7 +122,6 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Mini Reviews Grid */}
         <div className="grid md:grid-cols-3 gap-4">
           {reviews.slice(0, 3).map((review, index) => (
             <div key={index} className="glass rounded-xl p-6 hover:border-amber-500/20 transition-all">
@@ -137,6 +135,20 @@ export default function Testimonials() {
               <div className="text-dark-500 text-xs">{review.vehicle}</div>
             </div>
           ))}
+        </div>
+
+        {/* View All Reviews Link */}
+        <div className="text-center mt-12">
+          <button
+            onClick={() => {
+              setLocation('/reviews');
+              window.scrollTo(0, 0);
+            }}
+            className="inline-flex items-center gap-2 text-amber-400 font-semibold hover:text-amber-300 transition-colors group"
+          >
+            View All Reviews
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, ArrowUp, Star } from 'lucide-react';
+import { Phone, Mail, MapPin, Star } from 'lucide-react';
 
 const quickLinks = [
   { label: 'Interior Detailing', href: '/services/interior-detailing' },
@@ -12,9 +12,9 @@ const quickLinks = [
 const companyLinks = [
   { label: 'About Us', href: '/#about' },
   { label: 'Our Services', href: '/#services' },
-  { label: 'Gallery', href: '/#gallery' },
-  { label: 'Pricing', href: '/#pricing' },
-  { label: 'Reviews', href: '/#testimonials' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Reviews', href: '/reviews' },
   { label: 'Contact', href: '/#contact' },
 ];
 
@@ -34,10 +34,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-dark-950 border-t border-white/5">
-      {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img
@@ -61,7 +59,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services Links */}
           <div>
             <h3 className="font-heading text-lg font-bold text-white mb-4">Services</h3>
             <nav className="space-y-2">
@@ -77,7 +74,6 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Company Links */}
           <div>
             <h3 className="font-heading text-lg font-bold text-white mb-4">Company</h3>
             <nav className="space-y-2">
@@ -93,7 +89,6 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Contact Info */}
           <div>
             <h3 className="font-heading text-lg font-bold text-white mb-4">Contact</h3>
             <div className="space-y-3">
@@ -114,7 +109,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-dark-500 text-sm">

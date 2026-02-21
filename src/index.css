@@ -34,6 +34,9 @@ h1, h2, h3, h4, h5, h6 {
 
   .glass-dark {
     @apply bg-black/40 backdrop-blur-lg border border-white/5;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -58,6 +61,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.6);
+  }
+}
+
+@keyframes pulse-glow-red {
   0%, 100% {
     box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
   }
@@ -91,6 +103,37 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.glass-dark {
+  -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(20px) !important;
+  background-color: rgba(2, 6, 23, 0.85) !important;
+  transition: none !important;
+  will-change: auto;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+[class*="backdrop-blur"] {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: rgba(2, 6, 23, 0.85);
+  will-change: auto;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.glass-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.92);
+  z-index: -1;
 }
 
 ::-webkit-scrollbar {
